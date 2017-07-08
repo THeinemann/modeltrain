@@ -1,0 +1,5 @@
+
+
+task hello(type: Exec) {
+    commandLine "echo", "Hello World"
+}
