@@ -10,6 +10,7 @@ except ModuleNotFoundError:
 
 
 app = Flask(__name__)
+GPIO.setmode(GPIO.BCM)
 
 # TODO Save state outside of program
 _switches = {}
