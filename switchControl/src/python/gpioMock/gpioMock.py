@@ -23,7 +23,7 @@ class state:
         self.direction = direction
         self.state = state
 
-def setmode():
+def setmode(mode):
     # Nothing to do here
     pass
 
