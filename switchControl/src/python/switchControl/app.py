@@ -27,9 +27,9 @@ def setSwitch(switch, direction):
     if not direction in _directions:
         raise ValueError("direction must be either straight or turn, but is {}".format(direction))
     GPIO.output(_switches[switch], _directions[direction])
-    return "Hello, World!"
+    return "Ok"
 
-@app.route('/switch/<int:pin>', methods=['POST'])
+@app.route('/switch/atPin/<int:pin>', methods=['POST'])
 def addSwitch(pin):
     global _nextSwitch
     if pin in _switches:
