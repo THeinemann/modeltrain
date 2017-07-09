@@ -1,0 +1,12 @@
+#!/bin/sh
+
+pidfile=$PWD/logs/nginx.pid
+
+if [ -f $pidfile ]
+then
+    kill -QUIT $(cat $pidfile)
+else
+    >&2 echo Could not find pidfile. Is nginx running?
+    >&2 echo \(Looked at ${pidfile}\)
+    exit -1
+fi
