@@ -3,3 +3,7 @@
 task hello(type: Exec) {
     commandLine "echo", "Hello World"
 }
+
+task test(type: Exec) {
+    commandLine "python", "-m", "unittest", "discover", "-v", "-s", "./src/python", "-p*_test.py"
+}
