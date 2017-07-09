@@ -32,8 +32,9 @@ def setSwitch(switch, direction):
 @app.route('/switch/atPin/<int:pin>', methods=['POST'])
 def addSwitch(pin):
     global _nextSwitch
-    if pin in _switches:
-        raise RuntimeError("Pin {} already is registered as switch {}".format(pin, _switches[pin]))
+    if pin in _switches.values():
+        switch = list(_switches.keys())[list(_switches.values()).index(pin)]
+        raise RuntimeError("Pin {} already is registered as switch {}".format(pin, switch))
     switchId = _nextSwitch
     _switches[switchId] = pin
     GPIO.setup(pin, GPIO.OUT)
