@@ -16,28 +16,42 @@ OUT = 11
 LOW = 0
 HIGH = 1
 
-_activePins = {}
+activePins = {}
 
 class state:
     def __init__(self, direction, state):
         self.direction = direction
         self.state = state
 
-def setmode(mode):
-    # Nothing to do here
-    pass
+class gpioMock:
+    BCM = 90
+    BOARD = 91
 
-def setup(pin, direction):
-    if pin in _activePins:
-        logger.warning("Pin {} is already active".format(pin))
-    _activePins[pin] = state(direction, LOW)
+    IN = 10
+    OUT = 11
 
-def output(pin, state):
-    logger.info("Pin {} is now in state {}".format(pin, state))
-    _activePins[pin].state = state
+    LOW = 0
+    HIGH = 1
 
-def cleanup(pin=None):
-    if pin:
-        del _activePins[pin]
-    else:
-        _activePins.clear()
+    activePins = {}
+
+    def setmode(self, mode):
+        # Nothing to do here
+        pass
+
+    def setup(self, pin, direction):
+        if pin in self.activePins:
+            logger.warning("Pin {} is already active".format(pin))
+        self.activePins[pin] = state(direction, self.LOW)
+
+    def output(self, pin, state):
+        logger.info("Pin {} is now in state {}".format(pin, state))
+        self.activePins[pin].state = state
+
+    def cleanup(self, pin=None):
+        if pin:
+            del self.activePins[pin]
+        else:
+            self.activePins.clear()
+
+GPIO = gpioMock()
