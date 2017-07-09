@@ -1,3 +1,4 @@
 .gradle/
 __pycache__
 nginx/logs
+nginx/nginx.conf.temp
