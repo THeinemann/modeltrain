@@ -7,17 +7,6 @@ logger.setLevel(logging.INFO)
 handler = logging.StreamHandler(stdout)
 logger.addHandler(handler)
 
-BCM = 90
-BOARD = 91
-
-IN = 10
-OUT = 11
-
-LOW = 0
-HIGH = 1
-
-activePins = {}
-
 class state:
     def __init__(self, direction, state):
         self.direction = direction
