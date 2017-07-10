@@ -1,5 +1,6 @@
 from flask import Flask
 import sys
+import atexit
 try:
     import RPi.GPIO as GPIO
 except ModuleNotFoundError:
@@ -12,7 +13,14 @@ from switchControl.switchControl import SwitchControl, Direction
 app = Flask(__name__)
 GPIO.setmode(GPIO.BCM)
 
-switchControl = SwitchControl(GPIO)
+switchControl = None
+
+@app.before_first_request
+def init():
+    print("Running init")
+    global switchControl
+    switchControl = SwitchControl(GPIO)
+    atexit.register(GPIO.cleanup)
 
 @app.route('/switch/<int:switch>/<direction>', methods=['PUT'])
 def setSwitch(switch, direction):

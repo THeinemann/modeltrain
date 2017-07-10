@@ -21,7 +21,7 @@ class gpioMock:
 
     LOW = 0
     HIGH = 1
-    
+
     def __init__(self):
         self.activePins = {}
 
@@ -40,8 +40,10 @@ class gpioMock:
 
     def cleanup(self, pin=None):
         if pin:
+            logger.info("Cleaning up pin {}".format(pin))
             del self.activePins[pin]
         else:
+            logger.info("Cleaning up all pins")
             self.activePins.clear()
 
 GPIO = gpioMock()
