@@ -1,11 +1,12 @@
 
 import unittest
-from switchControl.switchControl import SwitchControl
-from gpioMock import GPIO
+from switchControl.switchControl import SwitchControl, Direction
+from gpioMock import gpioMock
 
 class SwitchControlTest(unittest.TestCase):
-    def test_registerSwitch(self):
-        sc = SwitchControl()
+    def test_shouldRegisterSwitch(self):
+        GPIO = gpioMock.gpioMock()
+        sc = SwitchControl(GPIO)
         sc.registerSwitch(3)
         self.assertEqual(1, len(sc.switches))
         self.assertTrue(0 in sc.switches)
@@ -32,3 +33,23 @@ class SwitchControlTest(unittest.TestCase):
         self.assertEqual(GPIO.HIGH, GPIO.activePins[3].state)
         self.assertEqual(GPIO.OUT, GPIO.activePins[4].direction)
         self.assertEqual(GPIO.HIGH, GPIO.activePins[4].state)
+
+    def test_shouldSetSwitch(self):
+        GPIO = gpioMock.gpioMock()
+        sc = SwitchControl(GPIO)
+        switch1 = sc.registerSwitch(3)
+        switch2 = sc.registerSwitch(4)
+        self.assertEqual(GPIO.HIGH, GPIO.activePins[3].state)
+        self.assertEqual(GPIO.HIGH, GPIO.activePins[4].state)
+
+        sc.setSwitch(switch1, Direction.straight)
+        self.assertEqual(GPIO.HIGH, GPIO.activePins[3].state)
+        self.assertEqual(GPIO.HIGH, GPIO.activePins[4].state)
+
+        sc.setSwitch(switch1, Direction.turn)
+        self.assertEqual(GPIO.LOW, GPIO.activePins[3].state)
+        self.assertEqual(GPIO.HIGH, GPIO.activePins[4].state)
+
+        sc.setSwitch(switch2, Direction.turn)
+        self.assertEqual(GPIO.LOW, GPIO.activePins[3].state)
+        self.assertEqual(GPIO.LOW, GPIO.activePins[4].state)
