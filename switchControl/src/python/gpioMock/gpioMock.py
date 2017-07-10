@@ -21,8 +21,9 @@ class gpioMock:
 
     LOW = 0
     HIGH = 1
-
-    activePins = {}
+    
+    def __init__(self):
+        self.activePins = {}
 
     def setmode(self, mode):
         # Nothing to do here

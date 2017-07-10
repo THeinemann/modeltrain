@@ -1,13 +1,6 @@
 
 from enum import Enum
 import sys
-try:
-    import RPi.GPIO as GPIO
-except ModuleNotFoundError:
-    sys.stdout.write("Could not import RPi.GPIO - Will continue with GPIO Mock.\n")
-    sys.stdout.write("If you are running this program on a Raspberry Pi, this is probably not what you want.\n")
-    sys.stdout.write("The GPIO pins will not actually be changed, i.e. connected devices are not controlled.\n")
-    from gpioMock import GPIO
 
 class Direction(Enum):
     straight = 1
@@ -42,5 +35,5 @@ class SwitchControl:
             raise ValueError("{} is not a valid switch ID".format(switch))
         if not isinstance(direction, Direction):
             raise ValueError("direction must be a direction value, but is {}".format(direction))
-        GPIO.output(self.switches[switch], self.getOutputForDirection(direction))
+        self.gpio.output(self.switches[switch], self.getOutputForDirection(direction))
         return "Ok"
