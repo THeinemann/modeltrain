@@ -1,1 +1,1 @@
-from gpioMock.gpioMock import GPIO
+from .gpioMock import GPIO, GpioMock

@@ -7,12 +7,14 @@ logger.setLevel(logging.INFO)
 handler = logging.StreamHandler(stdout)
 logger.addHandler(handler)
 
+
 class state:
     def __init__(self, direction, state):
         self.direction = direction
         self.state = state
 
-class gpioMock:
+
+class GpioMock:
     BCM = 90
     BOARD = 91
 
@@ -46,4 +48,4 @@ class gpioMock:
             logger.info("Cleaning up all pins")
             self.activePins.clear()
 
-GPIO = gpioMock()
+GPIO = GpioMock()
