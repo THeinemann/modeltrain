@@ -7,8 +7,9 @@ except ModuleNotFoundError:
     sys.stdout.write("Could not import RPi.GPIO - Will continue with GPIO Mock.\n")
     sys.stdout.write("If you are running this program on a Raspberry Pi, this is probably not what you want.\n")
     sys.stdout.write("The GPIO pins will not actually be changed, i.e. connected devices are not controlled.\n")
-    from ..gpioMock import GPIO
-from .switchControl import SwitchControl, Direction
+    from gpioMock import GPIO
+from switchControl.switchControl import SwitchControl, Direction
+from switchControl.persistence import SwitchDao, sqliteConnectionProvider
 
 app = Flask(__name__)
 GPIO.setmode(GPIO.BCM)
@@ -20,7 +21,9 @@ switchControl = None
 def init():
     print("Running init")
     global switchControl
-    switchControl = SwitchControl(GPIO)
+    sqlite_connection = sqliteConnectionProvider.get_sqlite_connection()
+    switch_dao = SwitchDao(sqlite_connection)
+    switchControl = SwitchControl(GPIO, switch_dao)
     atexit.register(GPIO.cleanup)
 
 
