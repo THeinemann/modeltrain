@@ -1,14 +1,16 @@
 MT_SWITCHDB = "MT_SWITCHDB"
 
+ID_COLUMN = "id"
+PIN_COLUMN = "pin"
 
 class SwitchDao:
-    createTableStatement = '''CREATE TABLE IF NOT EXISTS switches (
-                                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                pin INTEGER NOT NULL
-                            );'''
-    getPinForSwitchStatement = "SELECT (pin) FROM switches where id=?"
-    getSwitchForPinStatement = "SELECT (switch) FROM switches where pin=?"
-    insertStatement = "INSERT INTO switches VALUES (?)"
+    createTableStatement = """CREATE TABLE IF NOT EXISTS switches (
+                                {} INTEGER PRIMARY KEY AUTOINCREMENT,
+                                {} INTEGER NOT NULL
+                            );""".format(ID_COLUMN, PIN_COLUMN)
+    getPinForSwitchStatement = "SELECT ({}) FROM switches where {}=?".format(PIN_COLUMN, ID_COLUMN)
+    getSwitchForPinStatement = "SELECT ({}) FROM switches where {}=?".format(ID_COLUMN, PIN_COLUMN)
+    insertStatement = "INSERT INTO switches ({}) VALUES (?)".format(PIN_COLUMN)
 
     def __init__(self, connection):
         self.conn = connection
