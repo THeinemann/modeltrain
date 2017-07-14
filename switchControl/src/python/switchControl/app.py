@@ -29,10 +29,10 @@ def init():
 
 @app.route('/switch/<int:switch>/<direction>', methods=['PUT'])
 def set_switch(switch, direction):
-    return switchControl.setSwitch(switch, Direction[direction])
+    return switchControl.set_switch(switch, Direction[direction])
 
 
 @app.route('/switch/atPin/<int:pin>', methods=['POST'])
 def add_switch(pin):
-    result = switchControl.registerSwitch(pin)
+    result = switchControl.register_switch(pin)
     return str(result)
