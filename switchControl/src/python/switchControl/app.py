@@ -1,13 +1,6 @@
 from flask import Flask
-import sys
 import atexit
-try:
-    import RPi.GPIO as GPIO
-except ModuleNotFoundError:
-    sys.stdout.write("Could not import RPi.GPIO - Will continue with GPIO Mock.\n")
-    sys.stdout.write("If you are running this program on a Raspberry Pi, this is probably not what you want.\n")
-    sys.stdout.write("The GPIO pins will not actually be changed, i.e. connected devices are not controlled.\n")
-    from gpioMock import GPIO
+from gpioWrapper import GPIO
 from switchControl.switchControl import SwitchControl, Direction
 from switchControl.persistence import SwitchDao, sqliteConnectionProvider
 

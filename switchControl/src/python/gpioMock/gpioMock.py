@@ -24,6 +24,12 @@ class GpioMock:
     LOW = 0
     HIGH = 1
 
+    RISING = 20
+    FALLING = 21
+    BOTH = 22
+
+    VERSION = "GPIO Mock"
+
     def __init__(self):
         self.activePins = {}
 
@@ -31,10 +37,10 @@ class GpioMock:
         # Nothing to do here
         pass
 
-    def setup(self, pin, direction):
+    def setup(self, pin, direction, initial=None):
         if pin in self.activePins:
             logger.warning("Pin {} is already active".format(pin))
-        self.activePins[pin] = state(direction, self.LOW)
+        self.activePins[pin] = state(direction, initial or self.LOW)
 
     def output(self, pin, state):
         logger.info("Pin {} is now in state {}".format(pin, state))
