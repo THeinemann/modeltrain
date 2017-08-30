@@ -10,6 +10,7 @@ class SwitchDao:
                             );""".format(ID_COLUMN, PIN_COLUMN)
     getPinForSwitchStatement = "SELECT ({}) FROM switches where {}=?".format(PIN_COLUMN, ID_COLUMN)
     getSwitchForPinStatement = "SELECT ({}) FROM switches where {}=?".format(ID_COLUMN, PIN_COLUMN)
+    getSwitchesStatement = "SELECT ({}) FROM switches".format(ID_COLUMN)
     insertStatement = "INSERT INTO switches ({}) VALUES (?)".format(PIN_COLUMN)
 
     def __init__(self, connection):
@@ -40,3 +41,8 @@ class SwitchDao:
         result = cursor.lastrowid
         self.conn.commit()
         return result
+
+    def get_all_switches(self):
+        cursor = self.conn.cursor()
+        cursor.execute(self.getSwitchesStatement)
+        return cursor.fetchall()

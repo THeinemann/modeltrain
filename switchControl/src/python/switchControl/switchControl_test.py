@@ -61,3 +61,17 @@ class SwitchControlTest(unittest.TestCase):
         self.assertEqual(GPIO.LOW, GPIO.activePins[3].state)
         self.assertEqual(GPIO.LOW, GPIO.activePins[4].state)
         switch_dao.get_pin_for_switch.assert_called_with(switch2)
+
+    def test_shouldGetAllSwitches(self):
+        GPIO = GpioMock()
+        
+        switch_dao = Mock()
+        switch_dao.get_all_switches = Mock()
+        switch_dao.get_all_switches.return_value = [1,2,3,4,5]
+
+        sc = SwitchControl(GPIO, switch_dao)
+
+        actual = sc.get_switches()
+
+        self.assertEqual(actual, [1,2,3,4,5])
+        switch_dao.get_all_switches.assert_called()

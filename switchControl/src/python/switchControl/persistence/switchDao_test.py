@@ -18,6 +18,7 @@ class SwitchDaoTest(unittest.TestCase):
         self.cursor = Mock()
         self.cursor.execute = Mock()
         self.cursor.fetchone = Mock()
+        self.cursor.fetchall = Mock()
         self.conn.cursor.return_value = self.cursor
 
         self.switch_dao = SwitchDao(self.conn)
@@ -59,3 +60,12 @@ class SwitchDaoTest(unittest.TestCase):
 
         self.cursor.execute.assert_called_with(SwitchDao.insertStatement, (4,))
         self.conn.commit.assert_called()
+
+    def test_shouldGetAllSwitches(self):
+        self.cursor.fetchall.return_value = [1,2,3]
+        
+        actual = self.switch_dao.get_all_switches()
+        self.assertEqual(actual, [1,2,3])
+
+        self.cursor.execute.assert_called_with(SwitchDao.getSwitchesStatement)
+        self.cursor.fetchall.assert_called_with()

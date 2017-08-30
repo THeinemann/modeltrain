@@ -20,12 +20,18 @@ def init():
     atexit.register(GPIO.cleanup)
 
 
-@app.route('/switch/<int:switch>/<direction>', methods=['PUT'])
+@app.route('/switches/<int:switch>/<direction>', methods=['PUT'])
 def set_switch(switch, direction):
     return switchControl.set_switch(switch, Direction[direction])
 
 
-@app.route('/switch/atPin/<int:pin>', methods=['POST'])
+@app.route('/switches/atPin/<int:pin>', methods=['POST'])
 def add_switch(pin):
     result = switchControl.register_switch(pin)
+    return str(result)
+
+
+@app.route('/switches')
+def get_switches(pin):
+    result = switchControl.get_switches()
     return str(result)

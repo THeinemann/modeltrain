@@ -36,3 +36,6 @@ class SwitchControl:
             raise ValueError("direction must be a direction value, but is {}".format(direction))
         self.gpio.output(pin, self.get_output_for_direction(direction))
         return "Ok"
+
+    def get_switches(self):
+        return self.switch_dao.get_all_switches()
