@@ -2,3 +2,7 @@
 __pycache__
 nginx/logs
 nginx/nginx.conf.temp
+.idea
+.vscode
+ui/dist
+node_modules
