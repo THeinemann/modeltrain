@@ -9,6 +9,10 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 
 
 module.exports = {
+  devServer: {
+    inline:true,
+    port: 8008
+  },
   entry: './src/index.js',
   output: {
     path: path.resolve('dist'),
