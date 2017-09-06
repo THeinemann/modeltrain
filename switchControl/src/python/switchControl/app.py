@@ -32,6 +32,6 @@ def add_switch(pin):
 
 
 @app.route('/switches')
-def get_switches(pin):
+def get_switches():
     result = switchControl.get_switches()
     return str(result)

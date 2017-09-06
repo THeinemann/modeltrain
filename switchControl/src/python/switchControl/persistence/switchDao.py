@@ -45,4 +45,4 @@ class SwitchDao:
     def get_all_switches(self):
         cursor = self.conn.cursor()
         cursor.execute(self.getSwitchesStatement)
-        return cursor.fetchall()
+        return list(map(lambda x: x[0], cursor.fetchall()))

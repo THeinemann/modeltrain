@@ -62,7 +62,7 @@ class SwitchDaoTest(unittest.TestCase):
         self.conn.commit.assert_called()
 
     def test_shouldGetAllSwitches(self):
-        self.cursor.fetchall.return_value = [1,2,3]
+        self.cursor.fetchall.return_value = [(1,),(2,),(3,)]
         
         actual = self.switch_dao.get_all_switches()
         self.assertEqual(actual, [1,2,3])
