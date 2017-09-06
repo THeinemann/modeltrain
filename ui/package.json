@@ -5,14 +5,18 @@
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server",
+    "dist": "webpack",
     "test": "mocha --compilers js:babel-core/register ./src/test"
   },
   "author": "Thomas Heinemann",
   "license": "UNLICENSED",
   "dependencies": {
     "babel-cli": "^6.26.0",
+    "lodash": "^4.17.4",
+    "qwest": "^4.5.0",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "reflux": "^6.4.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
