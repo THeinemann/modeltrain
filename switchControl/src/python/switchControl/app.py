@@ -3,6 +3,7 @@ import atexit
 from gpioWrapper import GPIO
 from switchControl.switchControl import SwitchControl, Direction
 from switchControl.persistence import SwitchDao, sqliteConnectionProvider
+from configuration import load_configuration
 
 app = Flask(__name__)
 GPIO.setmode(GPIO.BCM)
@@ -14,7 +15,8 @@ switchControl = None
 def init():
     print("Running init")
     global switchControl
-    sqlite_connection = sqliteConnectionProvider.get_sqlite_connection()
+    configuration = load_configuration()
+    sqlite_connection = sqliteConnectionProvider.get_sqlite_connection(configuration)
     switch_dao = SwitchDao(sqlite_connection)
     switchControl = SwitchControl(GPIO, switch_dao)
     atexit.register(GPIO.cleanup)

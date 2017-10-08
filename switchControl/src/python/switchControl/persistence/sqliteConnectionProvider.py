@@ -1,10 +1,14 @@
 import sqlite3
-import os
+from xdg import BaseDirectory
 
-MT_SWITCHDB = "MT_SWITCHDB"
+DEFAULT_DB_FILE = "modeltrains.db"
 
+def get_database_file(configuration):
+    if "database" in configuration:
+        return configuration["database"]
 
-def get_sqlite_connection(dbfile = None):
-    if dbfile is None:
-        dbfile = os.environ[MT_SWITCHDB]
+    return "{}/{}".format(BaseDirectory.xdg_data_home, DEFAULT_DB_FILE)
+
+def get_sqlite_connection(configuration):
+    dbfile = get_database_file(configuration)
     return sqlite3.connect(dbfile)

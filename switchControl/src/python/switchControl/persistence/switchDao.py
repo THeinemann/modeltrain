@@ -1,4 +1,3 @@
-MT_SWITCHDB = "MT_SWITCHDB"
 
 ID_COLUMN = "id"
 PIN_COLUMN = "pin"
