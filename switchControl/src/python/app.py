@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 import atexit
 from gpioWrapper import GPIO
-from switchControl.switchControl import SwitchControl, Direction
+from switchControl import SwitchControl, Direction
 from switchControl.persistence import SwitchDao, sqliteConnectionProvider
 from configuration import load_configuration
 

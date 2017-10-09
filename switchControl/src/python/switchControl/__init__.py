@@ -1,2 +1,2 @@
 
-from .app import app
+from .switchControl import SwitchControl, Direction
