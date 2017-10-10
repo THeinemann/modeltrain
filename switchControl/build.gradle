@@ -7,3 +7,12 @@ task hello(type: Exec) {
 task test(type: Exec) {
     commandLine "python", "-m", "unittest", "discover", "-v", "-s", "./src/python", "-p*_test.py"
 }
+
+task dist(type: Exec) {
+    workingDir "${projectDir}/src/python"
+    commandLine "python", "setup.py", "sdist", "--dist-dir", "${projectDir}/build/dist"
+}
+
+task clean(type: Delete) {
+    delete "build"
+}

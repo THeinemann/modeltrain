@@ -6,3 +6,5 @@ nginx/nginx.conf.temp
 .vscode
 ui/dist
 node_modules
+switchControl/src/python/MANIFEST
+build
