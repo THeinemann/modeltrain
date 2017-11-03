@@ -46,4 +46,4 @@ def add_switch(pin):
 def get_switches():
     result = switchControl.get_switches()
     LOGGER.info("Found the following switches: %s", result)
-    return jsonify(result)
+    return jsonify({"data": result})

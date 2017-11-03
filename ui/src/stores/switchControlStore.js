@@ -17,7 +17,7 @@ class SwitchControlStore extends Reflux.Store {
 
     onGetSwitches() {
         getAllSwitches()
-            .then( (switches) => { this.setState({switches})} )
+            .then( (switches) => { this.setState({switches: switches.data})} )
             .catch( (error) => { this.setState({error})} );
     }
 }
