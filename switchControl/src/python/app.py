@@ -4,16 +4,20 @@ from gpioWrapper import GPIO
 from switchControl import SwitchControl, Direction
 from switchControl.persistence import SwitchDao, sqliteConnectionProvider
 from configuration import load_configuration
+import logging
 
 app = Flask(__name__)
 GPIO.setmode(GPIO.BCM)
 
 switchControl = None
 
+logging.basicConfig(level=logging.INFO)
+LOGGER = logging.getLogger("app")
+
 @app.before_first_request
 def init():
-    print("Running init")
     global switchControl
+    LOGGER.info("Running init")
     configuration = load_configuration()
     sqlite_connection = sqliteConnectionProvider.get_sqlite_connection(configuration)
     switch_dao = SwitchDao(sqlite_connection)
