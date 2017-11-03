@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, __version__
 import atexit
 from gpioWrapper import GPIO
 from switchControl import SwitchControl, Direction
@@ -13,6 +13,8 @@ switchControl = None
 
 logging.basicConfig(level=logging.INFO)
 LOGGER = logging.getLogger("app")
+
+LOGGER.info("Using flask version %s",  __version__)
 
 @app.before_first_request
 def init():
