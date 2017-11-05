@@ -1,0 +1,7 @@
+#!/bin/sh
+
+pi_server=${1:-localhost}
+tempfile=$PWD/nginx.dev.conf.temp
+
+sed "s/{{pi_server}}/${pi_server}/" nginx.dev.conf > $tempfile
+nginx -c $tempfile -p $PWD
