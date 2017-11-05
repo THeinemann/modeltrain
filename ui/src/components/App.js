@@ -1,50 +1,18 @@
 "use strict";
 
 import React from 'react';
-import Reflux from 'reflux';
-import {Button} from 'react-bootstrap';
-import _ from 'lodash';
+import SwitchTable from './SwitchTable'
+import SectionsTable from './SectionsTable'
 
-import {setSwitch, directions} from '../clients/switchControlClient'
-import {switchControlActions, SwitchControlStore} from '../stores/switchControlStore'
-
-function Switch({id}) {
-    return <tr>
-            <td>{id}</td>
-            <td>  <button onClick={ () => setSwitch(id, directions.straight) }>Straight</button> </td>
-            <td>  <button onClick={ () => setSwitch(id, directions.turn) }>Turn</button> </td>
-        </tr>;
-}
-
-class App extends Reflux.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {}
-        this.store = SwitchControlStore;
-    }
-
-    componentDidMount() {
-        switchControlActions.getSwitches();
-    }
-
-    renderLoading() {
-        return (<div>Loading data...</div>)
-    }
-
-    render() {
-        const switches = this.state.switches
-        if (!switches) {
-            return this.renderLoading();
-        }
-
-        return (
-        <table>
-            <tbody>
-            {(switches.map( (v, i) => <Switch key={i} id={v} />))}
-            </tbody>
-        </table>);
-    }
+const App = function() {
+    return <table className="app-table">
+                <tbody>
+                    <tr>
+                        <td><SwitchTable/></td>
+                        <td><SectionsTable/></td>
+                    </tr>
+                </tbody>
+            </table>;
 };
 
 export default App;
