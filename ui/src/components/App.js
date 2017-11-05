@@ -8,8 +8,8 @@ const App = function() {
     return <table className="app-table">
                 <tbody>
                     <tr>
-                        <td><SwitchTable/></td>
-                        <td><SectionsTable/></td>
+                        <td className='app-table-cell'><SwitchTable/></td>
+                        <td className='app-table-cell'><SectionsTable/></td>
                     </tr>
                 </tbody>
             </table>;

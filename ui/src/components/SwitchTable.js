@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Reflux from 'reflux';
-import {Button} from 'react-bootstrap';
 import _ from 'lodash';
 
 import {setSwitch, directions} from '../clients/switchControlClient'
