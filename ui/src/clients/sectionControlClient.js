@@ -1,6 +1,6 @@
 "use strict";
 
-import qwest from "qwest";
+import qwest from "../qwest/qwest";
 
 
 const getAllSections = () => {
