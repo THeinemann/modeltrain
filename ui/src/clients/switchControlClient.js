@@ -15,8 +15,12 @@ const getAllSwitches = () => {
 
 const setSwitch = (switchId, direction) => {
     const dir = directions[direction];
-    return qwest.put(`/switches/${switchId}/${dir}`)
-    .then( (request) => request.response )
+    if ( dir ) {
+        return qwest.put(`/switches/${switchId}/${dir}`)
+        .then( (request) => request.response )
+    } else {
+        return Promise.reject(`Direction ${direction} is invalid.`)
+    }
 }
 
 export {getAllSwitches, setSwitch, directions};
