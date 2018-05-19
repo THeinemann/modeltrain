@@ -20,7 +20,7 @@ class SectionControlTest(unittest.TestCase):
         section_dao_mock.get_section_for_pin.assert_called_with(3)
         section_dao_mock.insert_section.assert_called_with(3)
 
-    def test_shouldNotRegisterSwitchIfPinIsInUse(self):
+    def test_shouldNotRegisterSectionIfPinIsInUse(self):
         GPIO = GpioMock()
         section_dao_mock = Mock()
         section_dao_mock.get_section_for_pin = Mock(return_value=0)
@@ -31,7 +31,7 @@ class SectionControlTest(unittest.TestCase):
             sc.register_section(3)
         self.assertEqual(str(cm.exception), "Pin 3 already is registered as section 0")
 
-    def test_shouldSetSwitch(self):
+    def test_shouldSetSection(self):
         GPIO = GpioMock()
         GPIO.setup(3, GPIO.OUT)
         GPIO.output(3, GPIO.HIGH)
