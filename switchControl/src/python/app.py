@@ -19,7 +19,6 @@ LOGGER = logging.getLogger("app")
 
 LOGGER.info("Using flask version %s",  __version__)
 
-@app.before_first_request
 def init():
     global switchControl
     global sectionControl
@@ -34,6 +33,7 @@ def init():
     sectionControl = SectionControl(GPIO, section_dao)
     atexit.register(GPIO.cleanup)
 
+init()
 
 @app.route('/switches/<int:switch>/<direction>', methods=['PUT'])
 def set_switch(switch, direction):
