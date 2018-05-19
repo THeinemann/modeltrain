@@ -1,10 +1,16 @@
-import sys
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+MOCK_WARNING = """Could not import RPi.GPIO - Will continue with GPIO Mock.
+If you are running this program on a Raspberry Pi, this is probably not what you want.
+The GPIO pins will not actually be changed, i.e. connected devices are not controlled."""
+
 try:
     import RPi.GPIO as _GPIO
 except ModuleNotFoundError:
-    sys.stdout.write("Could not import RPi.GPIO - Will continue with GPIO Mock.\n")
-    sys.stdout.write("If you are running this program on a Raspberry Pi, this is probably not what you want.\n")
-    sys.stdout.write("The GPIO pins will not actually be changed, i.e. connected devices are not controlled.\n")
+    logger.warn(MOCK_WARNING)
     from gpioMock import GPIO as _GPIO
 
 

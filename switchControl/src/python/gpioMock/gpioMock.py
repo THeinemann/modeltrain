@@ -1,18 +1,13 @@
 
 import logging
-from sys import stdout
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-handler = logging.StreamHandler(stdout)
-logger.addHandler(handler)
-
 
 class state:
     def __init__(self, direction, state):
         self.direction = direction
         self.state = state
-
 
 class GpioMock:
     BCM = 90
