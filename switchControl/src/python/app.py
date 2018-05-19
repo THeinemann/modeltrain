@@ -59,7 +59,7 @@ def get_switches():
 
 @app.route('/sections/<int:section>', methods=['PUT'])
 def set_section(section):
-    data = request.json
+    data = request.get_json()
     if "enabled" not in data:
         return jsonify('Request body must contain field "enabled"'), 400
     sectionControl.set_section(section, data)
