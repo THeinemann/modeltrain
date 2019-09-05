@@ -1,4 +1,5 @@
 rootProject.name = 'modeltrains'
 
 include 'switchControl'
+include 'speedControl'
 include 'ui'

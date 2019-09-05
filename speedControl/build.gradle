@@ -1,0 +1,10 @@
+apply plugin: 'base'
+
+task testCompile(type: Exec) {
+    commandLine "platformio", "run", "-e", "test"
+}
+
+task test(type: Exec) {
+    commandLine "$buildDir/pio/build/test/program"
+    dependsOn testCompile
+}
