@@ -1,0 +1,7 @@
+#!/bin/sh
+
+pi_username=pi
+pi_host=pi
+
+
+ssh ${pi_username}@${pi_host} 'sudo shutdown now'
