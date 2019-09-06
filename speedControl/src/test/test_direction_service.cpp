@@ -1,4 +1,3 @@
-#ifdef TEST
 #include <gtest/gtest.h>
 #include <ArduinoFake.h>
 
@@ -39,6 +38,3 @@ TEST_F(DirectionServiceTest, changeDirectionToBackward) {
     Verify(Method(ArduinoFake(), digitalWrite).Using(1, HIGH)).Once();
     Verify(Method(ArduinoFake(), digitalWrite).Using(2, HIGH)).Never();
 }
-
-
-#endif

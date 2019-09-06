@@ -1,4 +1,3 @@
-#ifdef TEST
 #include <gtest/gtest.h>
 #include <ArduinoFake.h>
 
@@ -32,5 +31,3 @@ TEST_F(SpeedServiceTest, shouldSetSpeedToZeroAtStart) {
     SpeedService speedService(7);
     Verify(Method(ArduinoFake(), analogWrite).Using(7, 0)).Once();
 }
-
-#endif
