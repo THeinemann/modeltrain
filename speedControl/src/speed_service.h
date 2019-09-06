@@ -5,7 +5,7 @@ class SpeedService {
 public:
     SpeedService(unsigned int en);
 
-    void setSpeed(unsigned byte);
+    void setSpeed(unsigned char speed);
 
 private:
     const unsigned int en;

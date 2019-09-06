@@ -7,6 +7,6 @@ SpeedService::SpeedService(unsigned int en)
     setSpeed(0);
 }
 
-void SpeedService::setSpeed(unsigned int speed) {
+void SpeedService::setSpeed(unsigned char speed) {
     analogWrite(en, speed);
 }
