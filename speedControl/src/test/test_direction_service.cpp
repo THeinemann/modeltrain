@@ -1,32 +1,44 @@
 #ifdef TEST
-#include <catch.hpp>
+#include <gtest/gtest.h>
 #include <ArduinoFake.h>
 
 #include "../direction_service.h"
 
 using namespace fakeit;
 
-TEST_CASE("Direction is changed", "[DirectionService]") {
-    When(Method(ArduinoFake(), digitalWrite)).AlwaysReturn();
-    auto directionService = DirectionService(1, 2);
+class DirectionServiceTest : public ::testing::Test {
+public:
+    DirectionServiceTest()
+    : ::testing::Test(), directionService(1, 2)
+    {}
 
-    SECTION("Set direction to forward") {
-        directionService.setDirection(DirectionService::FORWARD);
-        Verify(Method(ArduinoFake(), digitalWrite).Using(1, LOW));
-        Verify(Method(ArduinoFake(), digitalWrite).Using(2, LOW));
-        Verify(Method(ArduinoFake(), digitalWrite).Using(2, HIGH)).Once();
-        Verify(Method(ArduinoFake(), digitalWrite).Using(1, HIGH)).Never();
+protected:
+    virtual void SetUp() {
+        When(Method(ArduinoFake(), digitalWrite)).AlwaysReturn();
     }
 
-    SECTION("Set direction to backward") {
-        directionService.setDirection(DirectionService::BACKWARD);
-        Verify(Method(ArduinoFake(), digitalWrite).Using(1, LOW));
-        Verify(Method(ArduinoFake(), digitalWrite).Using(2, LOW));
-        Verify(Method(ArduinoFake(), digitalWrite).Using(1, HIGH)).Once();
-        Verify(Method(ArduinoFake(), digitalWrite).Using(2, HIGH)).Never();
+    virtual void TearDown() {
+        ArduinoFake().Reset();
     }
 
-    ArduinoFake().Reset();
+    DirectionService directionService;
+};
+
+TEST_F(DirectionServiceTest, changeDirectionToForward) {
+    directionService.setDirection(DirectionService::FORWARD);
+    Verify(Method(ArduinoFake(), digitalWrite).Using(1, LOW));
+    Verify(Method(ArduinoFake(), digitalWrite).Using(2, LOW));
+    Verify(Method(ArduinoFake(), digitalWrite).Using(2, HIGH)).Once();
+    Verify(Method(ArduinoFake(), digitalWrite).Using(1, HIGH)).Never();
 }
+
+TEST_F(DirectionServiceTest, changeDirectionToBackward) {
+    directionService.setDirection(DirectionService::BACKWARD);
+    Verify(Method(ArduinoFake(), digitalWrite).Using(1, LOW));
+    Verify(Method(ArduinoFake(), digitalWrite).Using(2, LOW));
+    Verify(Method(ArduinoFake(), digitalWrite).Using(1, HIGH)).Once();
+    Verify(Method(ArduinoFake(), digitalWrite).Using(2, HIGH)).Never();
+}
+
 
 #endif
