@@ -20,6 +20,8 @@ enum StatusCode {
     INTERNAL_ERROR = 50
 };
 
+unsigned int numberOfParameters(Command command);
+
 }
 
 #endif
