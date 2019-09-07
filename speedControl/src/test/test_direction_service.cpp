@@ -24,7 +24,7 @@ protected:
 };
 
 TEST_F(DirectionServiceTest, changeDirectionToForward) {
-    directionService.setDirection(DirectionService::FORWARD);
+    directionService.setDirection(protocol::FORWARD);
     Verify(Method(ArduinoFake(), digitalWrite).Using(1, LOW));
     Verify(Method(ArduinoFake(), digitalWrite).Using(2, LOW));
     Verify(Method(ArduinoFake(), digitalWrite).Using(2, HIGH)).Once();
@@ -32,7 +32,7 @@ TEST_F(DirectionServiceTest, changeDirectionToForward) {
 }
 
 TEST_F(DirectionServiceTest, changeDirectionToBackward) {
-    directionService.setDirection(DirectionService::BACKWARD);
+    directionService.setDirection(protocol::BACKWARD);
     Verify(Method(ArduinoFake(), digitalWrite).Using(1, LOW));
     Verify(Method(ArduinoFake(), digitalWrite).Using(2, LOW));
     Verify(Method(ArduinoFake(), digitalWrite).Using(1, HIGH)).Once();

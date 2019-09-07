@@ -2,11 +2,11 @@
 #include "arduino_wrapper.h"
 
 
-void DirectionService::setDirection(unsigned int direction) {
+void DirectionService::setDirection(protocol::Direction direction) {
   digitalWrite(in1, LOW);
   digitalWrite(in2, LOW);
 
-  if (direction == FORWARD) {
+  if (direction == protocol::FORWARD) {
     digitalWrite(in1, LOW);
     digitalWrite(in2, HIGH);
   } else {
