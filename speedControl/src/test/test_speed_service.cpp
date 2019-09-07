@@ -26,8 +26,3 @@ TEST_F(SpeedServiceTest, shouldSetSpeed) {
     speedService.setSpeed(47);
     Verify(Method(ArduinoFake(), analogWrite).Using(7, 47)).Once();
 }
-
-TEST_F(SpeedServiceTest, shouldSetSpeedToZeroAtStart) {
-    SpeedService speedService(7);
-    Verify(Method(ArduinoFake(), analogWrite).Using(7, 0)).Once();
-}
