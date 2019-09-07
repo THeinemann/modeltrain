@@ -1,5 +1,5 @@
 #include "speed_service.h"
-#include "arduino_wrapper.h"
+#include "arduino_wrapper.hpp"
 
 SpeedService::SpeedService(unsigned int en)
 : en(en)

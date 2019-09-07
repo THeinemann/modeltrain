@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <fakeit/fakeit.hpp>
 #include "../controller.hpp"
-#include "../protocol.h"
+#include "protocol.h"
 
 struct IDirectionService {
     virtual void setDirection(unsigned int direction) = 0;

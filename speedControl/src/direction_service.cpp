@@ -1,5 +1,5 @@
 #include "direction_service.h"
-#include "arduino_wrapper.h"
+#include "arduino_wrapper.hpp"
 
 
 void DirectionService::setDirection(protocol::Direction direction) {

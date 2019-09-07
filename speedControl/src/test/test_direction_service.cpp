@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <ArduinoFake.h>
 
-#include "../direction_service.h"
+#include "direction_service.h"
 
 using namespace fakeit;
 

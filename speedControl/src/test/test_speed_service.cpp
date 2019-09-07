@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <ArduinoFake.h>
 
-#include "../speed_service.h"
+#include "speed_service.h"
 
 using namespace fakeit;
 
