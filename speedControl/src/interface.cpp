@@ -1,1 +1,3 @@
-thomas@Triton.15414:1567854667
+#include "interface.hpp"
+
+template class InterfaceBase<Controller, 1500>;
