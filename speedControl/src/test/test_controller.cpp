@@ -67,3 +67,13 @@ TEST_F(ControllerTest, shouldReturnClientErrorIfDirectionIsInvalid) {
 
     Verify(Method(directionService, setDirection).Using(protocol::FORWARD)).Never();
 }
+
+TEST_F(ControllerTest, shouldReturnInvalidCommandIfCommandIsInvalid) {
+  When(Method(directionService, setDirection)).AlwaysReturn();
+
+  unsigned char parameters[] = "\x2";
+  auto status = controller.receiveCommand((protocol::Command)(42), parameters);
+  EXPECT_EQ(status, protocol::INVALID_COMMAND);
+
+  Verify(Method(directionService, setDirection).Using(protocol::FORWARD)).Never();
+}
