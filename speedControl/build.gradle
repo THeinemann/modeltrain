@@ -1,5 +1,11 @@
 apply plugin: 'base'
 
+task compile(type: Exec) {
+    commandLine "platformio", "run", "-e", "uno"
+}
+
+assemble.dependsOn(compile)
+
 task testCompile(type: Exec) {
     commandLine "platformio", "run", "-e", "test"
 }
@@ -8,3 +14,5 @@ task test(type: Exec) {
     commandLine "$buildDir/pio/build/test/program"
     dependsOn testCompile
 }
+
+check.dependsOn(test)
