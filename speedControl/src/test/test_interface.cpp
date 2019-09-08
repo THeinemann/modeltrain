@@ -9,7 +9,7 @@ struct IController {
   virtual protocol::StatusCode receiveCommand(protocol::Command command, const unsigned char parameters[]) = 0;
 };
 
-const unsigned int DELAY = 1234;
+const unsigned int TEST_DELAY = 1234;
 
 class InterfaceTest : public ::testing::Test {
 public:
@@ -19,7 +19,7 @@ public:
 
 protected:
   Mock<IController> controller;
-  InterfaceBase<IController, DELAY> interface;
+  InterfaceBase<IController, TEST_DELAY> interface;
 
   virtual void TearDown() {
     controller.Reset();
@@ -35,7 +35,7 @@ TEST_F(InterfaceTest, shouldWaitIfNoSerialDataIsAvailable) {
   interface.process();
 
   Verify(Method(ArduinoFake(Serial), available)).Once();
-  Verify(Method(ArduinoFake(), delay).Using(DELAY));
+  Verify(Method(ArduinoFake(), delay).Using(TEST_DELAY));
 }
 
 TEST_F(InterfaceTest, shouldPassCommandToController) {
@@ -71,7 +71,7 @@ TEST_F(InterfaceTest, shouldPassCommandToController) {
                    }))
          .Once();
   ASSERT_EQ(receivedParameter, parameter);
-  Verify(Method(ArduinoFake(), delay).Using(DELAY));
+  Verify(Method(ArduinoFake(), delay).Using(TEST_DELAY));
   Verify(OverloadedMethod(ArduinoFake(Serial), write, size_t(uint8_t))
          .Using((uint8_t)protocol::OK))
          .Once();

@@ -1,3 +1,3 @@
 #include "interface.hpp"
 
-template class InterfaceBase<Controller, 1500>;
+template class InterfaceBase<Controller, DELAY>;
