@@ -3,12 +3,12 @@
 
 class SpeedService {
 public:
-    SpeedService(unsigned int en);
+  SpeedService(unsigned int en);
 
-    void setSpeed(unsigned char speed);
+  void setSpeed(unsigned char speed);
 
 private:
-    const unsigned int en;
+  const unsigned int en;
 };
 
 #endif

@@ -11,12 +11,12 @@ Result<protocol::Direction, bool> getDirection(unsigned char directionAsChar);
 template<class _DirectionService, class _SpeedService>
 class ControllerBase {
 public:
-    ControllerBase(_DirectionService& directionService, _SpeedService& speedService);
+  ControllerBase(_DirectionService& directionService, _SpeedService& speedService);
 
-    protocol::StatusCode receiveCommand(protocol::Command command, const unsigned char parameters[]);
+  protocol::StatusCode receiveCommand(protocol::Command command, const unsigned char parameters[]);
 private:
-    _DirectionService& directionService;
-    _SpeedService& speedService;
+  _DirectionService& directionService;
+  _SpeedService& speedService;
 };
 
 typedef ControllerBase<DirectionService, SpeedService> Controller;

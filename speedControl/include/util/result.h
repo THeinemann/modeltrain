@@ -4,38 +4,38 @@
 template<typename Success, typename Error>
 class Result {
 public:
-    enum Status {
-        SUCCESS,
-        ERROR
-    };
+  enum Status {
+               SUCCESS,
+               ERROR
+  };
 
-    Result(Success&& successResult)
+  Result(Success&& successResult)
     : status(SUCCESS), successResult(successResult)
-    {}
+  {}
 
-    Result(Error&& errorResult)
+  Result(Error&& errorResult)
     : status(ERROR), errorResult(errorResult)
-    {}
+  {}
 
-    bool isSuccessful() {
-        return status == SUCCESS;
-    }
+  bool isSuccessful() {
+    return status == SUCCESS;
+  }
 
-    Success& get() {
-        return successResult;
-    }
+  Success& get() {
+    return successResult;
+  }
 
-    Error& getError() {
-        return getError;
-    }
+  Error& getError() {
+    return getError;
+  }
 
 private:
-    const Status status;
+  const Status status;
 
-    const union {
-        Success successResult;
-        Error errorResult;
-    };
+  const union {
+    Success successResult;
+    Error errorResult;
+  };
 };
 
 #endif

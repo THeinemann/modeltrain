@@ -5,15 +5,15 @@
 
 template<class _Controller, unsigned int delayTime>
 class InterfaceBase {
-   public:
-      InterfaceBase(_Controller& controller);
+public:
+  InterfaceBase(_Controller& controller);
 
-        void process();
+  void process();
 
-      private:
-     _Controller& controller;
-  };
+private:
+  _Controller& controller;
+};
 
-  typedef InterfaceBase<Controller, 1500> Interface;
+typedef InterfaceBase<Controller, 1500> Interface;
 
 #endif
