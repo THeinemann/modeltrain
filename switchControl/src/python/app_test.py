@@ -10,7 +10,7 @@ with patch.dict("sys.modules", **{
     }):
     import app
 
-    class SwitchControlTest(unittest.TestCase):
+    class AppTest(unittest.TestCase):
         def setUp(self):
             self.app = app.app.test_client()
 
@@ -42,7 +42,7 @@ with patch.dict("sys.modules", **{
             get_switches_mock.return_value = [1,2,3]           
             rv = self.app.get('/switches')
             self.assertEqual(200, rv.status_code)
-            self.assertEqual(b'{\n  "data": [\n    1, \n    2, \n    3\n  ]\n}\n', rv.data)
+            self.assertEqual(b'{"data":[1,2,3]}\n', rv.data)
             
             get_switches_mock.assert_called_with()
 
@@ -83,6 +83,6 @@ with patch.dict("sys.modules", **{
             get_sections_mock.return_value = [1,2,3]
             rv = self.app.get('/sections')
             self.assertEqual(200, rv.status_code)
-            self.assertEqual(b'{\n  "data": [\n    1, \n    2, \n    3\n  ]\n}\n', rv.data)
+            self.assertEqual(b'{"data":[1,2,3]}\n', rv.data)
             
             get_sections_mock.assert_called_with()
