@@ -1,18 +1,12 @@
 
-
-task hello(type: Exec) {
-    commandLine "echo", "Hello World"
-}
+apply plugin: 'base'
 
 task test(type: Exec) {
-    commandLine "python", "-m", "unittest", "discover", "-v", "-s", "./src/python", "-p*_test.py"
+    commandLine "python", "-m", "unittest", "discover", "-v", "-s", "./src", "-p*_test.py"
 }
+check.dependsOn test
 
 task dist(type: Exec) {
-    workingDir "${projectDir}/src/python"
-    commandLine "python", "setup.py", "sdist", "--dist-dir", "${projectDir}/build/dist"
+    commandLine "python", "setup.py", "sdist", "--dist-dir", "${buildDir}/dist"
 }
-
-task clean(type: Delete) {
-    delete "build"
-}
+assemble.dependsOn dist

@@ -1,4 +1,5 @@
 from distutils.core import setup
+import setuptools
 
 setup(
     name = "SwitchControl",
@@ -7,9 +8,11 @@ setup(
 
     author = "Thomas Heinemann",
 
-    author_email = "data1701-e@web.de",
+    author_email = "heinemann.thomas@arcor.de",
 
-    packages = ["configuration", "gpioMock", "gpioWrapper", "switchControl", "."],
+    packages = setuptools.find_packages('./src'),
+
+    package_dir = {'': 'src'},
 
     description="SwitchControl server to control model railways with a Raspberry Pi.",
 
