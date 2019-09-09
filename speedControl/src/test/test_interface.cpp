@@ -76,3 +76,19 @@ TEST_F(InterfaceTest, shouldPassCommandToController) {
          .Using((uint8_t)protocol::OK))
          .Once();
 }
+
+TEST_F(InterfaceTest, shouldReturnInvalidCommandIfNumberOfParametersIsNotReached) {
+  When(Method(ArduinoFake(Serial), available)).Return(1);
+  When(Method(ArduinoFake(Serial), read)).Return(protocol::SET_DIRECTION);
+  When(Method(ArduinoFake(Serial), readBytes)).Return(0);
+  When(OverloadedMethod(ArduinoFake(Serial), write, size_t(uint8_t))).AlwaysReturn(1);
+  When(Method(ArduinoFake(), delay)).AlwaysReturn();
+
+  interface.process();
+
+  Verify(Method(ArduinoFake(Serial), available)).Once();
+  Verify(Method(ArduinoFake(), delay).Using(TEST_DELAY));
+  Verify(OverloadedMethod(ArduinoFake(Serial), write, size_t(uint8_t))
+         .Using((uint8_t)protocol::INVALID_COMMAND))
+         .Once();
+}
