@@ -1,6 +1,8 @@
 
 from enum import Enum
 
+BAUD_RATE = 9600
+
 class Command(Enum):
     set_speed = 0
     set_direction = 1
