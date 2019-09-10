@@ -1,0 +1,40 @@
+
+from flask import request
+from app import app
+from .protocol import Direction, StatusCode
+from .speedControl import SpeedControl
+
+speed_control = SpeedControl('/dev/ttyATM0')
+
+@app.route('/direction', methods=['PUT'])
+def set_direction():
+    payload = request.get_json()
+
+    direction = None
+    try:
+        direction = Direction[payload]
+    except KeyError:
+        return 'Invalid direction', 400
+
+    status = speed_control.set_direction(direction)
+
+    if status == StatusCode.ok:
+        return '', 204
+    else:
+        return 'An unexpected error occurred', 500
+
+@app.route('/speed', methods=['PUT'])
+def set_speed():
+    speed = request.get_json()
+
+    if type(speed) != int:
+        return 'Speed must be a number', 400
+    if speed < 0 or speed > 255:
+        return 'Speed must be a in range [0..255]', 400
+    status = speed_control.set_speed(speed)
+
+    if status == StatusCode.ok:
+        return '', 204
+    else:
+        return 'An unexpected error occurred', 500
+
