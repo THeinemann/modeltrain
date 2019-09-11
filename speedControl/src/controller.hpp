@@ -19,7 +19,7 @@ protocol::StatusCode ControllerBase<_DirectionService, _SpeedService>::receiveCo
       break;
     case protocol::SET_DIRECTION: {
       auto direction = getDirection(parameters[0]);
-      if (direction.isSuccessful()) {
+      if (direction.isValid()) {
         directionService.setDirection(direction.get());
         break;
       } else {

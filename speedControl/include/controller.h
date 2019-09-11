@@ -4,9 +4,9 @@
 #include "direction_service.h"
 #include "speed_service.h"
 #include "protocol.h"
-#include "util/result.h"
+#include "util/optional.h"
 
-Result<protocol::Direction, bool> getDirection(unsigned char directionAsChar);
+optional<protocol::Direction> getDirection(unsigned char directionAsChar);
 
 template<class _DirectionService, class _SpeedService>
 class ControllerBase {
