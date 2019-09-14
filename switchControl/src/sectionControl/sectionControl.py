@@ -4,7 +4,7 @@ class SectionControl:
     def __init__(self, gpio, section_dao):
         self.gpio = gpio
         self.section_dao = section_dao
-    
+
     def register_section(self, pin):
         existing_section = self.section_dao.get_section_for_pin(pin)
         if existing_section is not None:

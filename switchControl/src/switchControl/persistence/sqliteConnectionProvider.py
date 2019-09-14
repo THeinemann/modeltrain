@@ -14,4 +14,4 @@ def get_database_file(configuration):
 def get_sqlite_connection(configuration):
     dbfile = get_database_file(configuration)
     LOGGER.info("Using database file %s", dbfile)
-    return sqlite3.connect(dbfile)
+    return sqlite3.connect(dbfile, check_same_thread=False)
