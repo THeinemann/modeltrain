@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <fakeit/fakeit.hpp>
-#include "../controller.hpp"
+#include "../src/controller.hpp"
 #include "protocol.h"
 
 struct IDirectionService {
