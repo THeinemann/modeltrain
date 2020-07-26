@@ -1,23 +1,36 @@
 
 apply plugin: 'base'
 
+def virtualenvBase = "${buildDir}/virtualenv"
+def pathWithVirtualenv = "${virtualenvBase}/bin:${System.env.PATH}"
+
+
 task eggInfo(type: Exec) {
+    doFirst {
+        mkdir "${buildDir}"
+    }
     commandLine "python", "setup.py", "egg_info", "--egg-base", "${buildDir}"
+}
+
+task virtualenv(type: Exec) {
+    commandLine "virtualenv", "${virtualenvBase}"
 }
 
 task deps(type: Exec) {
     dependsOn eggInfo
+    dependsOn virtualenv
+    environment PATH: pathWithVirtualenv
     commandLine("pip", "install", "-r", "${buildDir}/SwitchControl.egg-info/requires.txt")
 }
 
 task test(type: Exec) {
     dependsOn deps
+    dependsOn virtualenv
+    environment PATH: pathWithVirtualenv
     commandLine "python", "-m", "unittest", "discover", "-v", "-s", "./src", "-p*_test.py"
 }
 
-task virtualenv(type: Exec) {
-    commandLine "virtualenv", "${buildDir}/virtualenv"
-}
+
 check.dependsOn test
 
 task dist(type: Exec) {
