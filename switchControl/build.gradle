@@ -1,8 +1,22 @@
 
 apply plugin: 'base'
 
+task eggInfo(type: Exec) {
+    commandLine "python", "setup.py", "egg_info", "--egg-base", "${buildDir}"
+}
+
+task deps(type: Exec) {
+    dependsOn eggInfo
+    commandLine("pip", "install", "-r", "${buildDir}/SwitchControl.egg-info/requires.txt")
+}
+
 task test(type: Exec) {
+    dependsOn deps
     commandLine "python", "-m", "unittest", "discover", "-v", "-s", "./src", "-p*_test.py"
+}
+
+task virtualenv(type: Exec) {
+    commandLine "virtualenv", "${buildDir}/virtualenv"
 }
 check.dependsOn test
 

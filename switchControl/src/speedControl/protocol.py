@@ -12,7 +12,7 @@ class Direction(Enum):
     backward = 1
 
 class StatusCode(Enum):
-    ok = 20,
-    client_error = 40,
-    invalid_command = 44,
+    ok = 20
+    client_error = 40
+    invalid_command = 44
     internal_error = 50

@@ -6,6 +6,8 @@ import logging
 from xdg import BaseDirectory
 from os import path
 
+from configuration.defaults import defaults
+
 CONFIG_FILE_NAME = "modeltrains.yml"
 
 LOGGER = logging.getLogger("configuration")
@@ -20,7 +22,7 @@ def get_configuration_file():
         global_config_file = "{}/{}".format(dir, CONFIG_FILE_NAME)
         if path.exists(global_config_file):
             return global_config_file
-    
+
     return None
 
 def load_configuration():
@@ -29,6 +31,7 @@ def load_configuration():
 
     if file_name:
         with open(file_name) as file:
-            return yaml.load(file)
+            set_parameters = yaml.load(file)
+            return dict(defaults, **set_parameters)
 
-    return {}
+    return defaults

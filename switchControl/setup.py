@@ -10,12 +10,10 @@ setup(
 
     author_email = "heinemann.thomas@arcor.de",
 
-    packages = setuptools.find_packages('./src'),
-
-    package_dir = {'': 'src'},
+    packages = setuptools.find_packages('.'),
 
     description="SwitchControl server to control model railways with a Raspberry Pi.",
 
-    install_requires = ["flask", "pyxdg", "pyyaml"]
+    install_requires = ["flask", "pyxdg", "pyyaml", "pyserial"]
 
 )

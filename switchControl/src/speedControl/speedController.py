@@ -3,10 +3,10 @@ from flask import Blueprint, request
 from .protocol import Direction, StatusCode
 import speedControl.speedControl
 
-def build_controller():
+def build_controller(configuration):
     controller = Blueprint('speed_controller', __name__)
 
-    speed_control = speedControl.SpeedControl('/dev/ttyATM0')
+    speed_control = speedControl.SpeedControl(configuration['arduino_port'])
 
     @controller.route('/direction', methods=['PUT'])
     def set_direction():
