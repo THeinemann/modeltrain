@@ -3,6 +3,7 @@ from flask import Blueprint, request
 from .protocol import Direction, StatusCode
 import speedControl.speedControl
 
+
 def build_controller(configuration):
     controller = Blueprint('speed_controller', __name__)
 
