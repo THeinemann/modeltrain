@@ -4,36 +4,40 @@ apply plugin: 'base'
 def virtualenvBase = "${buildDir}/virtualenv"
 def pathWithVirtualenv = "${virtualenvBase}/bin:${System.env.PATH}"
 
+def pip = "${virtualenvBase}/bin/pip"
+def python = "${virtualenvBase}/bin/python"
 
-task eggInfo(type: Exec) {
-    doFirst {
-        mkdir "${buildDir}"
-    }
-    commandLine "python", "setup.py", "egg_info", "--egg-base", "${buildDir}"
-}
 
 task virtualenv(type: Exec) {
     commandLine "virtualenv", "${virtualenvBase}"
+}
+
+task eggInfo(type: Exec) {
+    dependsOn virtualenv
+    doFirst {
+        mkdir "${buildDir}"
+    }
+    commandLine python, "setup.py", "egg_info", "--egg-base", "${buildDir}"
 }
 
 task deps(type: Exec) {
     dependsOn eggInfo
     dependsOn virtualenv
     environment PATH: pathWithVirtualenv
-    commandLine("pip", "install", "-r", "${buildDir}/SwitchControl.egg-info/requires.txt")
+    commandLine pip, "install", "-r", "${buildDir}/SwitchControl.egg-info/requires.txt"
 }
 
 task test(type: Exec) {
     dependsOn deps
     dependsOn virtualenv
     environment PATH: pathWithVirtualenv
-    commandLine "python", "-m", "unittest", "discover", "-v", "-s", "./src", "-p*_test.py"
+    commandLine python, "-m", "unittest", "discover", "-v", "-s", "./src", "-p*_test.py"
 }
 
 
 check.dependsOn test
 
 task dist(type: Exec) {
-    commandLine "python", "setup.py", "sdist", "--dist-dir", "${buildDir}/dist"
+    commandLine python, "setup.py", "sdist", "--dist-dir", "${buildDir}/dist"
 }
 assemble.dependsOn dist
