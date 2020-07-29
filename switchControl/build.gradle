@@ -34,10 +34,13 @@ task test(type: Exec) {
     commandLine python, "-m", "unittest", "discover", "-v", "-s", "./src", "-p*_test.py"
 }
 
-
 check.dependsOn test
 
 task dist(type: Exec) {
+    dependsOn virtualenv
     commandLine python, "setup.py", "sdist", "--dist-dir", "${buildDir}/dist"
+    doLast {
+        delete "$projectDir/SwitchControl.egg-info"
+    }
 }
 assemble.dependsOn dist
