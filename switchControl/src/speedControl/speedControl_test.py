@@ -23,7 +23,7 @@ class SpeedControlTest(unittest.TestCase):
         speedControl = SpeedControl(self.port)
 
         expectedStatus = StatusCode.ok
-        conn.read.return_value = expectedStatus.value
+        conn.read.return_value = bytes([expectedStatus.value])
 
         speed = 42
         actualStatus = speedControl.set_speed(speed)
@@ -41,7 +41,7 @@ class SpeedControlTest(unittest.TestCase):
         direction = Direction.backward
         expectedStatus = StatusCode.internal_error
 
-        conn.read.return_value = expectedStatus.value
+        conn.read.return_value = bytes([expectedStatus.value])
         actualStatus = speedControl.set_direction(direction)
 
         self.assertEqual(expectedStatus, actualStatus)

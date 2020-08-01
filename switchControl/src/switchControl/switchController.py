@@ -8,6 +8,7 @@ from gpioWrapper import GPIO
 
 LOGGER = logging.getLogger("switch_controller")
 
+
 def build_controller(switch_dao):
     controller = Blueprint('switch_controller', __name__, url_prefix='/switches')
 

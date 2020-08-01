@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <ArduinoFake.h>
 
-#include "../interface.hpp"
+#include "../src/interface.hpp"
 
 using namespace fakeit;
 

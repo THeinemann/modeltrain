@@ -10,7 +10,7 @@ The GPIO pins will not actually be changed, i.e. connected devices are not contr
 try:
     import RPi.GPIO as _GPIO
 except ModuleNotFoundError:
-    logger.warn(MOCK_WARNING)
+    logger.warning(MOCK_WARNING)
     from gpioMock import GPIO as _GPIO
 
 
@@ -41,5 +41,6 @@ class GpioWrapper:
 
     def __getattr__(self, item):
         return getattr(self.gpio, item)
+
 
 GPIO = GpioWrapper(_GPIO)
