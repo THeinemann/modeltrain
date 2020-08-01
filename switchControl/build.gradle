@@ -27,11 +27,11 @@ task test(type: Exec) {
 
 check.dependsOn test
 
-task dist(type: Exec) {
-    dependsOn pipInstall
-    commandLine python, "setup.py", "sdist", "--dist-dir", "${buildDir}/dist"
-    doLast {
-        delete "$projectDir/SwitchControl.egg-info"
+task dist(type: Tar) {
+    archiveFileName = "${buildDir}/dist/SwitchControl.tar.gz"
+    compression  = Compression.GZIP
+    from("src") {
+        exclude "**/__pycache__"
     }
 }
 assemble.dependsOn dist
