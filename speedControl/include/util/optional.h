@@ -1,13 +1,13 @@
 #ifndef __UTIL_OPTIONAL_H
 #define __UTIL_OPTIONAL_H
 
-class monotype {};
+class unit {};
 
 template<typename T>
 class optional {
 public:
   optional()
-    : valid(false), nothing(monotype())
+    : valid(false), nothing(unit())
     {}
 
   optional(const T& value)
@@ -26,7 +26,7 @@ private:
   const bool valid;
   const union {
     T value;
-    monotype nothing;
+    unit nothing;
   };
 };
 

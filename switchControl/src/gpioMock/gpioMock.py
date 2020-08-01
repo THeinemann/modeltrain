@@ -1,13 +1,16 @@
 
 import logging
+from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+
+@dataclass
 class state:
-    def __init__(self, direction, state):
-        self.direction = direction
-        self.state = state
+    direction: int
+    state: int
+
 
 class GpioMock:
     BCM = 90
