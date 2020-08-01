@@ -15,14 +15,9 @@ dependencies {
     }
 }
 
-def pathWithVirtualenv = "${python.envPath}/bin:${System.env.PATH}"
-
-def python = "${python.envPath}/bin/python"
-
-task test(type: Exec) {
-    dependsOn pipInstall
-    environment PATH: pathWithVirtualenv
-    commandLine python, "-m", "unittest", "discover", "-v", "-s", "./src", "-p*_test.py"
+task test(type: PythonTask) {
+    module = "unittest"
+    command "discover -v -s ./src -p*_test.py"
 }
 
 check.dependsOn test
