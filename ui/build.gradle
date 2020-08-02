@@ -21,4 +21,11 @@ dependencies {
     implementation(npm("react-dom", "16.13.1"))
 }
 
-kotlin.target.browser { }
+kotlin.target.browser {
+    testTask {
+        useKarma() {
+            usePhantomJS()
+        }
+    }
+}
+
