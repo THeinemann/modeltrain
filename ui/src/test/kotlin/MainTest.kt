@@ -3,6 +3,8 @@ import kotlin.js.Date
 
 import kotlin.test.assertEquals
 
+import modeltrain.printDate
+
 class MainTest {
     @Test
     fun shouldPrintDateCorrectly() {
