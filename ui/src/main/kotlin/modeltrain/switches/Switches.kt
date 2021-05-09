@@ -7,34 +7,38 @@ import modeltrain.styles.Styles
 import react.*
 import react.dom.*
 import styled.css
+import styled.styledDiv
 import styled.styledH2
 
-external interface SwitchProps: RProps {
+external interface SwitchProps : RProps {
     var switchClient: SwitchClient
 }
 
-external interface SwitchState: RState {
+external interface SwitchState : RState {
     var switches: List<Int>?
 }
 
 class Switches(props: SwitchProps) : RComponent<SwitchProps, SwitchState>(props) {
     override fun RBuilder.render() {
         val sws = state.switches
-        if (sws == null) {
-            val mainScope = MainScope()
-            mainScope.launch {
-                val s = props.switchClient.getSwitches()
-                setState {
-                    switches = s
-                }
+
+        styledDiv {
+            css(Styles.controlTable)
+            styledH2 {
+                css(Styles.tableHeader)
+                +"Switches"
             }
-            +"Loading"
-        } else {
-            span {
-                styledH2 {
-                    css(Styles.tableHeader)
-                    +"Switches"
+
+            if (sws == null) {
+                val mainScope = MainScope()
+                mainScope.launch {
+                    val s = props.switchClient.getSwitches()
+                    setState {
+                        switches = s
+                    }
                 }
+                +"Loading"
+            } else {
                 table {
                     tbody {
                         for (switch in sws) {

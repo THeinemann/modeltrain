@@ -6,34 +6,38 @@ import modeltrain.styles.Styles
 import react.*
 import react.dom.*
 import styled.css
+import styled.styledDiv
 import styled.styledH2
 
-external interface SectionProps: RProps {
+external interface SectionProps : RProps {
     var sectionClient: SectionClient
 }
 
-external interface SectionState: RState {
+external interface SectionState : RState {
     var sections: List<Int>?
 }
 
 class Sections(props: SectionProps) : RComponent<SectionProps, SectionState>(props) {
     override fun RBuilder.render() {
         val scs = state.sections
-        if (scs == null) {
-            val mainScope = MainScope()
-            mainScope.launch {
-                val s = props.sectionClient.getSections()
-                setState {
-                    sections = s
-                }
+
+        styledDiv {
+            css(Styles.controlTable)
+            styledH2 {
+                css(Styles.tableHeader)
+                +"Sections"
             }
-            +"Loading"
-        } else {
-            span {
-                styledH2 {
-                    css(Styles.tableHeader)
-                    +"Sections"
+
+            if (scs == null) {
+                val mainScope = MainScope()
+                mainScope.launch {
+                    val s = props.sectionClient.getSections()
+                    setState {
+                        sections = s
+                    }
                 }
+                +"Loading"
+            } else {
                 table {
                     tbody {
                         for (section in scs) {

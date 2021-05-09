@@ -1,7 +1,6 @@
 package modeltrain
 
 import kotlinx.css.*
-import react.dom.*
 import modeltrain.sections.SectionClient
 import modeltrain.sections.sections
 import modeltrain.switches.SwitchClient
@@ -9,6 +8,7 @@ import modeltrain.switches.switches
 import react.*
 import styled.css
 import styled.styledDiv
+import styled.styledH1
 import kotlin.js.Date
 
 fun Date.printDate(): String {
@@ -19,32 +19,18 @@ fun Date.printDate(): String {
     return "$day.$month.$year"
 }
 
-val modeltrains = rFunction<RProps>("App") { props ->
+val modeltrains = rFunction<RProps>("App") {
     val tableStyle: CSSBuilder.() -> Unit = {
         display = Display.flex
         float = Float.left
         width = LinearDimension("48%")
     }
-    val split = 1500
 
     styledDiv {
-        css {
-            media("(min-width: ${split + 1}px)") {
-                alignContent = Align.center
-                width = LinearDimension("30%")
-                marginLeft = LinearDimension.auto
-                marginRight = LinearDimension.auto
+        styledH1 {
+            css {
+                textAlign = TextAlign.center
             }
-
-            media("(max-width: ${split}px)") {
-                width = LinearDimension("100%")
-                marginLeft = LinearDimension("0")
-                marginRight = LinearDimension("0")
-
-            }
-        }
-
-        h1 {
             +"Model train control"
         }
         styledDiv {
