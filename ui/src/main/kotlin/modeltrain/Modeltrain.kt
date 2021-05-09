@@ -1,10 +1,10 @@
 package modeltrain
 
 import react.dom.*
-import kotlinx.browser.document
-import kotlinx.html.js.onClickFunction
 import modeltrain.sections.SectionClient
 import modeltrain.sections.sections
+import modeltrain.switches.SwitchClient
+import modeltrain.switches.switches
 import react.*
 import kotlin.js.Date
 
@@ -21,6 +21,9 @@ val modeltrains = rFunction<RProps>("App") { props ->
         +"Hello World!"
     }
     p {
+        switches {
+            switchClient = SwitchClient()
+        }
         sections {
             sectionClient = SectionClient()
         }
