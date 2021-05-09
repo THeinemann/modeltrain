@@ -1,7 +1,10 @@
 package modeltrain.sections
 
+import kotlinx.browser.window
 import kotlinx.coroutines.await
+import org.w3c.fetch.RequestInit
 import kotlin.js.Promise
+import kotlin.js.json
 
 
 class SectionClient {
@@ -9,13 +12,25 @@ class SectionClient {
         data class Section(val enabled: Boolean)
     }
 
-    suspend fun getSections(): ArrayList<Int> {
-        println("Getting sections...")
-        return Promise.resolve(arrayListOf(1, 2, 3, 4))
+    suspend fun getSections(): List<Int> {
+        val data: Array<Int> = window.fetch("/sections")
                 .await()
+                .json()
+                .await()
+                .asDynamic().data as Array<Int>
+
+
+        return arrayListOf(*data)
     }
 
     fun setSection(id: Int, enabled: Boolean) {
-        println("Set section $id to ${Section(enabled)}")
+        val json = JSON.stringify(Section(enabled))
+        val headers = json(Pair("Content-Type", "application/json"))
+
+        window.fetch("/sections/$id", RequestInit(
+                method = "PUT",
+                body = json,
+                headers = headers
+        ))
     }
 }
