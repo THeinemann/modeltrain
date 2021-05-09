@@ -25,15 +25,25 @@ val modeltrains = rFunction<RProps>("App") { props ->
         float = Float.left
         width = LinearDimension("48%")
     }
+    val split = 1500
 
     styledDiv {
         css {
-            alignContent = Align.center
-            width = LinearDimension("30%")
-            marginLeft = LinearDimension.auto
-            marginRight = LinearDimension.auto
+            media("(min-width: ${split + 1}px)") {
+                alignContent = Align.center
+                width = LinearDimension("30%")
+                marginLeft = LinearDimension.auto
+                marginRight = LinearDimension.auto
+            }
 
+            media("(max-width: ${split}px)") {
+                width = LinearDimension("100%")
+                marginLeft = LinearDimension("0")
+                marginRight = LinearDimension("0")
+
+            }
         }
+
         h1 {
             +"Model train control"
         }
