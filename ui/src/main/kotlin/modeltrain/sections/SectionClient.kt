@@ -2,6 +2,7 @@ package modeltrain.sections
 
 import kotlinx.browser.window
 import kotlinx.coroutines.await
+import modeltrain.common.ArrayWrapper
 import org.w3c.fetch.RequestInit
 import kotlin.js.Promise
 import kotlin.js.json
@@ -17,8 +18,8 @@ class SectionClient {
                 .await()
                 .json()
                 .await()
-                .asDynamic().data as Array<Int>
-
+                .unsafeCast<ArrayWrapper<Int>>()
+                .data
 
         return arrayListOf(*data)
     }
