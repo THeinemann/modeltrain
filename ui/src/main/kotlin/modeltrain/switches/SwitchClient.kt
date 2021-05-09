@@ -1,7 +1,10 @@
 package modeltrain.switches
 
+import kotlinx.browser.window
 import kotlinx.coroutines.await
+import org.w3c.fetch.RequestInit
 import kotlin.js.Promise
+import kotlin.js.json
 
 enum class Direction(private val value: String) {
     Straight("straight"), Turn("turn");
@@ -13,11 +16,19 @@ enum class Direction(private val value: String) {
 
 class SwitchClient {
     suspend fun getSwitches(): List<Int> {
-        return Promise.resolve(arrayListOf(1, 2, 3, 4, 5))
+        val data: Array<Int> = window.fetch("/switches")
                 .await()
+                .json()
+                .await()
+                .asDynamic().data as Array<Int>
+
+
+        return arrayListOf(*data)
     }
 
     fun setSwitch(id: Int, direction: Direction) {
-        println("Set switch $id to $direction")
+        window.fetch("/switches/$id/$direction", RequestInit(
+                method = "PUT"
+        ))
     }
 }

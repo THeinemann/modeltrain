@@ -16,8 +16,8 @@ external interface SwitchState: RState {
 
 class Switches(props: SwitchProps) : RComponent<SwitchProps, SwitchState>(props) {
     override fun RBuilder.render() {
-        val scs = state.switches
-        if (scs == null) {
+        val sws = state.switches
+        if (sws == null) {
             val mainScope = MainScope()
             mainScope.launch {
                 val s = props.switchClient.getSwitches()
@@ -29,21 +29,21 @@ class Switches(props: SwitchProps) : RComponent<SwitchProps, SwitchState>(props)
         } else {
             table {
                 tbody {
-                    for (section in scs) {
+                    for (switch in sws) {
                         tr {
                             td {
-                                +"Section $section"
+                                +"Switch $switch"
                             }
                             td {
                                 button {
                                     +"Straight"
-                                    attrs.onClickFunction = { props.switchClient.setSwitch(section, Direction.Straight) }
+                                    attrs.onClickFunction = { props.switchClient.setSwitch(switch, Direction.Straight) }
                                 }
                             }
                             td {
                                 button {
                                     +"Turn"
-                                    attrs.onClickFunction = { props.switchClient.setSwitch(section, Direction.Turn) }
+                                    attrs.onClickFunction = { props.switchClient.setSwitch(switch, Direction.Turn) }
                                 }
                             }
                         }
