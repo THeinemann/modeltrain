@@ -20,12 +20,18 @@ val modeltrains = rFunction<RProps>("App") { props ->
     h1 {
         +"Hello World!"
     }
-    p {
-        switches {
-            switchClient = SwitchClient()
-        }
-        sections {
-            sectionClient = SectionClient()
+    table {
+        tr {
+            td {
+                switches {
+                    switchClient = SwitchClient()
+                }
+            }
+            td {
+                sections {
+                    sectionClient = SectionClient()
+                }
+            }
         }
     }
 }
