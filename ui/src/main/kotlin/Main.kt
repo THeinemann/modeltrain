@@ -1,5 +1,10 @@
-
+import kotlinx.browser.document
+import modeltrain.App
+import react.dom.render
 
 fun main() {
-    modeltrain.main()
+    document.bgColor = "blue"
+    render(document.getElementById("root")) {
+        App()
+    }
 }

@@ -3,6 +3,7 @@ package modeltrain
 import react.dom.*
 import kotlinx.browser.document
 import kotlinx.html.js.onClickFunction
+import react.*
 import kotlin.js.Date
 
 fun Date.printDate(): String {
@@ -13,19 +14,18 @@ fun Date.printDate(): String {
     return "$day.$month.$year"
 }
 
-
-fun main() {
-    document.bgColor = "blue"
-    render(document.getElementById("root")) {
-        h1 {
-            +"Hello World!"
-        }
-        p {
-            +Date().printDate()
-            button {
-                attrs.onClickFunction = { println("Button was clicked") }
-                +"Click me"
-            }
+val modeltrains = rFunction<RProps>("App") { props ->
+    h1 {
+        +"Hello World!"
+    }
+    p {
+        +Date().printDate()
+        button {
+            attrs.onClickFunction = { println("Button was clicked") }
+            +"Click me"
         }
     }
+}
+
+fun RBuilder.App() = modeltrains.invoke {
 }
