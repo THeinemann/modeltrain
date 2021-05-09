@@ -2,8 +2,11 @@ package modeltrain.sections
 
 import kotlinx.coroutines.*
 import kotlinx.html.js.onClickFunction
+import modeltrain.styles.Styles
 import react.*
 import react.dom.*
+import styled.css
+import styled.styledH2
 
 external interface SectionProps: RProps {
     var sectionClient: SectionClient
@@ -26,29 +29,35 @@ class Sections(props: SectionProps) : RComponent<SectionProps, SectionState>(pro
             }
             +"Loading"
         } else {
-            table {
-                tbody {
-                    for (section in scs) {
-                        tr {
-                            td {
-                                +"Section $section"
-                            }
-                            td {
-                                button {
-                                    +"Enable"
-                                    attrs.onClickFunction = { props.sectionClient.setSection(section, true) }
+            span {
+                styledH2 {
+                    css(Styles.tableHeader)
+                    +"Sections"
+                }
+                table {
+                    tbody {
+                        for (section in scs) {
+                            tr {
+                                td {
+                                    +"Section $section"
                                 }
-                            }
-                            td {
-                                button {
-                                    +"Disable"
-                                    attrs.onClickFunction = { props.sectionClient.setSection(section, false) }
+                                td {
+                                    button {
+                                        +"Enable"
+                                        attrs.onClickFunction = { props.sectionClient.setSection(section, true) }
+                                    }
+                                }
+                                td {
+                                    button {
+                                        +"Disable"
+                                        attrs.onClickFunction = { props.sectionClient.setSection(section, false) }
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
+                }
             }
         }
     }

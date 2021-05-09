@@ -3,8 +3,11 @@ package modeltrain.switches
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.html.js.onClickFunction
+import modeltrain.styles.Styles
 import react.*
 import react.dom.*
+import styled.css
+import styled.styledH2
 
 external interface SwitchProps: RProps {
     var switchClient: SwitchClient
@@ -27,29 +30,35 @@ class Switches(props: SwitchProps) : RComponent<SwitchProps, SwitchState>(props)
             }
             +"Loading"
         } else {
-            table {
-                tbody {
-                    for (switch in sws) {
-                        tr {
-                            td {
-                                +"Switch $switch"
-                            }
-                            td {
-                                button {
-                                    +"Straight"
-                                    attrs.onClickFunction = { props.switchClient.setSwitch(switch, Direction.Straight) }
+            span {
+                styledH2 {
+                    css(Styles.tableHeader)
+                    +"Switches"
+                }
+                table {
+                    tbody {
+                        for (switch in sws) {
+                            tr {
+                                td {
+                                    +"Switch $switch"
                                 }
-                            }
-                            td {
-                                button {
-                                    +"Turn"
-                                    attrs.onClickFunction = { props.switchClient.setSwitch(switch, Direction.Turn) }
+                                td {
+                                    button {
+                                        +"Straight"
+                                        attrs.onClickFunction = { props.switchClient.setSwitch(switch, Direction.Straight) }
+                                    }
+                                }
+                                td {
+                                    button {
+                                        +"Turn"
+                                        attrs.onClickFunction = { props.switchClient.setSwitch(switch, Direction.Turn) }
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
+                }
             }
         }
     }

@@ -1,11 +1,14 @@
 package modeltrain
 
+import kotlinx.css.*
 import react.dom.*
 import modeltrain.sections.SectionClient
 import modeltrain.sections.sections
 import modeltrain.switches.SwitchClient
 import modeltrain.switches.switches
 import react.*
+import styled.css
+import styled.styledDiv
 import kotlin.js.Date
 
 fun Date.printDate(): String {
@@ -17,20 +20,33 @@ fun Date.printDate(): String {
 }
 
 val modeltrains = rFunction<RProps>("App") { props ->
-    h1 {
-        +"Hello World!"
+    val tableStyle: CSSBuilder.() -> Unit = {
+        display = Display.flex
+        float = Float.left
+        width = LinearDimension("48%")
     }
-    table {
-        tr {
-            td {
-                switches {
-                    switchClient = SwitchClient()
-                }
+
+    styledDiv {
+        css {
+            alignContent = Align.center
+            width = LinearDimension("30%")
+            marginLeft = LinearDimension.auto
+            marginRight = LinearDimension.auto
+
+        }
+        h1 {
+            +"Model train control"
+        }
+        styledDiv {
+            css(tableStyle)
+            switches {
+                switchClient = SwitchClient()
             }
-            td {
-                sections {
-                    sectionClient = SectionClient()
-                }
+        }
+        styledDiv {
+            css(tableStyle)
+            sections {
+                sectionClient = SectionClient()
             }
         }
     }
