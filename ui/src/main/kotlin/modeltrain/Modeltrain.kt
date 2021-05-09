@@ -1,9 +1,9 @@
 package modeltrain
 
-import kotlin.browser.document
+import react.dom.*
+import kotlinx.browser.document
+import kotlinx.html.js.onClickFunction
 import kotlin.js.Date
-import kotlinx.html.*
-import kotlinx.html.dom.*
 
 fun Date.printDate(): String {
     val year = this.getFullYear()
@@ -13,28 +13,19 @@ fun Date.printDate(): String {
     return "$day.$month.$year"
 }
 
-@JsName("onButtonClick")
-fun onButtonClick() {
-    println("Button was clicked")
-}
-
 
 fun main() {
     document.bgColor = "blue"
-    val root = document.getElementById("root")
-    root?.append {
-        div {
-            h1 {
-                +"Hello World"
-            }
-            p {
-                +Date().printDate()
-                button {
-                    onClick="ui.modeltrain.onButtonClick()"
-                    +"Click me"
-                }
+    render(document.getElementById("root")) {
+        h1 {
+            +"Hello World!"
+        }
+        p {
+            +Date().printDate()
+            button {
+                attrs.onClickFunction = { println("Button was clicked") }
+                +"Click me"
             }
         }
     }
-    println("Hello World!")
 }
