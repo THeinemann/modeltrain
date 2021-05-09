@@ -3,6 +3,8 @@ package modeltrain
 import react.dom.*
 import kotlinx.browser.document
 import kotlinx.html.js.onClickFunction
+import modeltrain.sections.SectionClient
+import modeltrain.sections.sections
 import react.*
 import kotlin.js.Date
 
@@ -19,10 +21,8 @@ val modeltrains = rFunction<RProps>("App") { props ->
         +"Hello World!"
     }
     p {
-        +Date().printDate()
-        button {
-            attrs.onClickFunction = { println("Button was clicked") }
-            +"Click me"
+        sections {
+            sectionClient = SectionClient()
         }
     }
 }
