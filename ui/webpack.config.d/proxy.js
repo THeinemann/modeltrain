@@ -1,4 +1,7 @@
-config.devServer.proxy = {
-    '/sections': 'http://pi:5000',
-    '/switches': 'http://pi:5000'
+
+if (config.devServer) {
+    config.devServer.proxy = {
+        '/sections': 'http://pi:5000',
+        '/switches': 'http://pi:5000'
+    }
 }

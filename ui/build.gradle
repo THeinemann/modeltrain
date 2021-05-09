@@ -28,11 +28,16 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-test-js"
 }
 
+kotlin {
+    js {
+        browser()
+    }
+}
+
 kotlin.target.browser {
     testTask {
-        useKarma() {
-            usePhantomJS()
-        }
+        // TODO This is not actually running the tests...
+        useMocha()
     }
 }
 
