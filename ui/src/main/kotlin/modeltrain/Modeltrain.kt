@@ -1,6 +1,8 @@
 package modeltrain
 
 import kotlinx.css.*
+import modeltrain.direction.DirectionClient
+import modeltrain.direction.directions
 import modeltrain.sections.SectionClient
 import modeltrain.sections.sections
 import modeltrain.switches.SwitchClient
@@ -34,17 +36,29 @@ val modeltrains = rFunction<RProps>("App") {
             +"Model train control"
         }
         styledDiv {
-            css(tableStyle)
-            switches {
-                switchClient = SwitchClient()
+            css {
+                textAlign = TextAlign.center
+            }
+            directions {
+                directionClient = DirectionClient()
             }
         }
         styledDiv {
-            css(tableStyle)
-            sections {
-                sectionClient = SectionClient()
+            styledDiv {
+                css(tableStyle)
+                switches {
+                    switchClient = SwitchClient()
+                }
+            }
+            styledDiv {
+                css(tableStyle)
+                sections {
+                    sectionClient = SectionClient()
+                }
             }
         }
+
+
     }
 }
 
