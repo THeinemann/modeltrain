@@ -1,5 +1,6 @@
 package modeltrain.direction
 
+import modeltrain.external.bootstrap.Variant
 import modeltrain.external.bootstrap.bootstrap
 import react.*
 
@@ -11,32 +12,31 @@ external interface DirectionsState : RState {
 }
 
 class Directions(props: DirectionsProps) : RComponent<DirectionsProps, DirectionsState>(props) {
-    val dropdown = bootstrap.dropdown
-    override fun RBuilder.render() {
-        dropdown {
-            attrs {
-                onSelect = { direction, _ -> props.directionClient.setDirection(direction) }
-            }
-            dropdown.toggle {
-                if (state.direction == null) {
-                    +"Direction"
-                } else {
-                    +"${state.direction}"
-                }
-            }
+    val buttonGroup = bootstrap.toggleButtonGroup
+    val bbutton = bootstrap.toggleButton
 
-            dropdown.menu {
-                dropdown.item {
-                    attrs {
-                        eventKey = Direction.Forward
-                    }
-                    +"Forward"
+    override fun RBuilder.render() {
+
+        buttonGroup {
+            attrs {
+                type = "radio"
+                name = "direction"
+                onChange = { dir -> props.directionClient.setDirection(dir.unsafeCast<Direction>()) }
+            }
+            bbutton {
+                +"Forward"
+                attrs {
+                    name = "forward"
+                    value = Direction.Forward
+                    variant = Variant.WARNING
                 }
-                dropdown.item {
-                    attrs {
-                        eventKey = Direction.Backward
-                    }
-                    +"Backward"
+            }
+            bbutton {
+                +"Backward"
+                attrs {
+                    name = "backward"
+                    value = Direction.Backward
+                    variant = Variant.WARNING
                 }
             }
         }

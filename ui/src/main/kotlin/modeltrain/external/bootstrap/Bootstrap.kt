@@ -6,6 +6,15 @@ external interface Bootstrap {
 
     @JsName("Button")
     val button: Button
+
+    @JsName("ToggleButton")
+    val toggleButton: ToggleButton
+
+    @JsName("ButtonGroup")
+    val buttonGroup: ButtonGroup
+
+    @JsName("ToggleButtonGroup")
+    val toggleButtonGroup: ToggleButtonGroup
 }
 
 @JsModule("react-bootstrap")
