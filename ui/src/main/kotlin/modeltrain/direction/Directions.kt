@@ -12,18 +12,18 @@ external interface DirectionsState : RState {
 }
 
 class Directions(props: DirectionsProps) : RComponent<DirectionsProps, DirectionsState>(props) {
-    val buttonGroup = bootstrap.toggleButtonGroup
-    val bbutton = bootstrap.toggleButton
+    val toggleButtonGroup = bootstrap.toggleButtonGroup
+    val toggleButton = bootstrap.toggleButton
 
     override fun RBuilder.render() {
 
-        buttonGroup {
+        toggleButtonGroup {
             attrs {
                 type = "radio"
                 name = "direction"
                 onChange = { dir -> props.directionClient.setDirection(dir.unsafeCast<Direction>()) }
             }
-            bbutton {
+            toggleButton {
                 +"Forward"
                 attrs {
                     name = "forward"
@@ -31,7 +31,7 @@ class Directions(props: DirectionsProps) : RComponent<DirectionsProps, Direction
                     variant = Variant.WARNING
                 }
             }
-            bbutton {
+            toggleButton {
                 +"Backward"
                 attrs {
                     name = "backward"
