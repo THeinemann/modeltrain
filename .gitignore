@@ -1,8 +1,8 @@
 .gradle/
 __pycache__
 nginx/logs
+nginx/ui
 nginx/nginx.conf.temp
-nginx/nginx.dev.conf.temp
 .idea
 .vscode
 ui/dist

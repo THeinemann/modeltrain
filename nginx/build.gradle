@@ -1,0 +1,16 @@
+apply plugin: 'base'
+
+task copyUi(type: Copy) {
+    dependsOn ':ui:build'
+    from '../ui/build/distributions'
+    into 'ui'
+}
+
+task start(type: Exec) {
+    dependsOn copyUi
+    commandLine './start_nginx'
+}
+
+task stop(type: Exec) {
+    commandLine './stop_nginx'
+}
