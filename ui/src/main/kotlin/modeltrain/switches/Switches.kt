@@ -3,6 +3,8 @@ package modeltrain.switches
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.html.js.onClickFunction
+import modeltrain.external.bootstrap.Variant
+import modeltrain.external.bootstrap.bootstrap
 import modeltrain.styles.Styles
 import react.*
 import react.dom.*
@@ -19,6 +21,8 @@ external interface SwitchState : RState {
 }
 
 class Switches(props: SwitchProps) : RComponent<SwitchProps, SwitchState>(props) {
+    val bbutton = bootstrap.button
+
     override fun RBuilder.render() {
         val sws = state.switches
 
@@ -47,15 +51,21 @@ class Switches(props: SwitchProps) : RComponent<SwitchProps, SwitchState>(props)
                                     +"Switch $switch"
                                 }
                                 td {
-                                    button {
+                                    bbutton {
                                         +"Straight"
-                                        attrs.onClickFunction = { props.switchClient.setSwitch(switch, Direction.Straight) }
+                                        attrs {
+                                            variant = Variant.PRIMARY
+                                            onClickFunction = { props.switchClient.setSwitch(switch, Direction.Straight) }
+                                        }
                                     }
                                 }
                                 td {
-                                    button {
+                                    bbutton {
                                         +"Turn"
-                                        attrs.onClickFunction = { props.switchClient.setSwitch(switch, Direction.Turn) }
+                                        attrs {
+                                            variant = Variant.SECONDARY
+                                            onClickFunction = { props.switchClient.setSwitch(switch, Direction.Turn) }
+                                        }
                                     }
                                 }
                             }

@@ -2,6 +2,8 @@ package modeltrain.sections
 
 import kotlinx.coroutines.*
 import kotlinx.html.js.onClickFunction
+import modeltrain.external.bootstrap.Variant
+import modeltrain.external.bootstrap.bootstrap
 import modeltrain.styles.Styles
 import react.*
 import react.dom.*
@@ -18,6 +20,8 @@ external interface SectionState : RState {
 }
 
 class Sections(props: SectionProps) : RComponent<SectionProps, SectionState>(props) {
+    val bbutton = bootstrap.button
+
     override fun RBuilder.render() {
         val scs = state.sections
 
@@ -46,15 +50,21 @@ class Sections(props: SectionProps) : RComponent<SectionProps, SectionState>(pro
                                     +"Section $section"
                                 }
                                 td {
-                                    button {
+                                    bbutton {
                                         +"Enable"
-                                        attrs.onClickFunction = { props.sectionClient.setSection(section, true) }
+                                        attrs {
+                                            variant = Variant.SUCCESS
+                                            onClickFunction = { props.sectionClient.setSection(section, true) }
+                                        }
                                     }
                                 }
                                 td {
-                                    button {
+                                    bbutton {
                                         +"Disable"
-                                        attrs.onClickFunction = { props.sectionClient.setSection(section, false) }
+                                        attrs {
+                                            variant = Variant.DANGER
+                                            onClickFunction = { props.sectionClient.setSection(section, false) }
+                                        }
                                     }
                                 }
                             }
