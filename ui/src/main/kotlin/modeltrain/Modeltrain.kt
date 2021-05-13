@@ -5,9 +5,14 @@ import modeltrain.direction.DirectionClient
 import modeltrain.direction.directions
 import modeltrain.sections.SectionClient
 import modeltrain.sections.sections
+import modeltrain.speed.SpeedClient
+import modeltrain.speed.speed
+import modeltrain.styles.CssStyle
 import modeltrain.switches.SwitchClient
 import modeltrain.switches.switches
+import org.w3c.dom.css.CSS
 import react.*
+import react.dom.span
 import styled.css
 import styled.styledDiv
 import styled.styledH1
@@ -28,6 +33,11 @@ val modeltrains = rFunction<RProps>("App") {
         width = LinearDimension("48%")
     }
 
+    val buttonStyle: CssStyle = {
+        display = Display.inlineBlock
+        margin = "3px"
+    }
+
     styledDiv {
         styledH1 {
             css {
@@ -39,8 +49,17 @@ val modeltrains = rFunction<RProps>("App") {
             css {
                 textAlign = TextAlign.center
             }
-            directions {
-                directionClient = DirectionClient()
+            styledDiv {
+                css(buttonStyle)
+                speed {
+                    speedClient = SpeedClient()
+                }
+            }
+            styledDiv {
+                css(buttonStyle)
+                directions {
+                    directionClient = DirectionClient()
+                }
             }
         }
         styledDiv {

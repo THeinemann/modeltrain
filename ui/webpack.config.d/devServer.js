@@ -1,7 +1,7 @@
 
 (() => {
 
-    const paths = ['/sections', '/switches', '/direction']
+    const paths = ['/sections', '/switches', '/direction', '/speed']
     const host = 'http://localhost:8080'
     const port = 8008
 
