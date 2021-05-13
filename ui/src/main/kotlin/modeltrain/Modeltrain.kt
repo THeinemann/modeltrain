@@ -8,11 +8,10 @@ import modeltrain.sections.sections
 import modeltrain.speed.SpeedClient
 import modeltrain.speed.speed
 import modeltrain.styles.CssStyle
+import modeltrain.styles.Styles
 import modeltrain.switches.SwitchClient
 import modeltrain.switches.switches
-import org.w3c.dom.css.CSS
 import react.*
-import react.dom.span
 import styled.css
 import styled.styledDiv
 import styled.styledH1
@@ -31,6 +30,12 @@ val modeltrains = rFunction<RProps>("App") {
         display = Display.flex
         float = Float.left
         width = LinearDimension("48%")
+
+        media(Styles.smallScreenQuery) {
+            display = Display.inherit
+            float = Float.inherit
+            width = LinearDimension.inherit
+        }
     }
 
     val buttonStyle: CssStyle = {

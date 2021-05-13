@@ -1,7 +1,6 @@
 package modeltrain.sections
 
 import kotlinx.coroutines.*
-import kotlinx.html.js.onClickFunction
 import modeltrain.external.bootstrap.Variant
 import modeltrain.external.bootstrap.bootstrap
 import modeltrain.styles.Styles
@@ -10,6 +9,7 @@ import react.dom.*
 import styled.css
 import styled.styledDiv
 import styled.styledH2
+import styled.styledTable
 
 external interface SectionProps : RProps {
     var sectionClient: SectionClient
@@ -42,7 +42,8 @@ class Sections(props: SectionProps) : RComponent<SectionProps, SectionState>(pro
                 }
                 +"Loading"
             } else {
-                table {
+                styledTable {
+                    css(Styles.controlTableBody)
                     tbody {
                         for (section in scs) {
                             tr {

@@ -2,7 +2,6 @@ package modeltrain.switches
 
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import kotlinx.html.js.onClickFunction
 import modeltrain.external.bootstrap.Variant
 import modeltrain.external.bootstrap.bootstrap
 import modeltrain.styles.Styles
@@ -11,6 +10,7 @@ import react.dom.*
 import styled.css
 import styled.styledDiv
 import styled.styledH2
+import styled.styledTable
 
 external interface SwitchProps : RProps {
     var switchClient: SwitchClient
@@ -43,7 +43,8 @@ class Switches(props: SwitchProps) : RComponent<SwitchProps, SwitchState>(props)
                 }
                 +"Loading"
             } else {
-                table {
+                styledTable {
+                    css(Styles.controlTableBody)
                     tbody {
                         for (switch in sws) {
                             tr {
