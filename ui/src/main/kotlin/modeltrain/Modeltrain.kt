@@ -25,7 +25,7 @@ fun Date.printDate(): String {
     return "$day.$month.$year"
 }
 
-val modeltrains = rFunction<RProps>("App") {
+val modeltrains = functionalComponent<RProps>("App") {
     val tableStyle: CSSBuilder.() -> Unit = {
         display = Display.flex
         float = Float.left
@@ -86,5 +86,6 @@ val modeltrains = rFunction<RProps>("App") {
     }
 }
 
-fun RBuilder.App() = modeltrains.invoke {
+fun RBuilder.App(): ReactElement {
+    return child(modeltrains) {}
 }
